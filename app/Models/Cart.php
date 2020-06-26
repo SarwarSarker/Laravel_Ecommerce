@@ -27,31 +27,7 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class);
     }
-    /**
-     * Display total item in the cart.
-     *
-     * @return interger total item
-     */
-    public static function totalItems()
-    {
-        if(Auth::check())
-        {
-            $carts= Cart::where('user_id',Auth::id())
-                      ->where('order_id', NULL)
-                      ->get();
-        }else
-        {
-            $carts= Cart::where('ip_address', request()->ip())
-                       ->where('order_id', NULL)
-                       ->get();
-        }
-        $total_item = 0;
-        foreach($carts as $cart)
-        {
-            $total_item += $cart->product_quantity;
-        }
-        return $total_item;
-    }
+  
     /**
      * Display total  cart.
      *
@@ -62,6 +38,7 @@ class Cart extends Model
         if(Auth::check())
         {
             $carts= Cart::where('user_id',Auth::id())
+                       ->orWhere('ip_address', request()->ip())
                        ->where('order_id', NULL)
                        ->get();
         }else
@@ -71,5 +48,21 @@ class Cart extends Model
                         ->get();
         }
         return $carts;
+    }
+      /**
+     * Display total item in the cart.
+     *
+     * @return interger total item
+     */
+    public static function totalItems()
+    {
+        $carts = Cart::totalCarts();
+        
+        $total_item = 0;
+        foreach($carts as $cart)
+        {
+            $total_item += $cart->product_quantity;
+        }
+        return $total_item;
     }
 }

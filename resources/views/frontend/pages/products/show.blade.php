@@ -65,8 +65,8 @@
 
         <p class="product-price">{{$product->price}} Taka</p>
         <p class="product-desc"><strong>Category :</strong>
-            <span class="text-primary ">{{$product->category->name}}</span> </p>
-        <p class="product-desc"><strong>Brand :</strong> <span class="text-danger">{{$product->brand->name}}</span>
+            <span class="badge badge-success ">{{$product->category->name}}</span> </p>
+        <p class="product-desc"><strong>Brand :</strong> <span class="badge badge-danger">{{$product->brand->name}}</span>
         </p>
         <p class="product-desc"><strong>Availibility :</strong> <span class="badge badge-info">
                 {{ $product->quantity < 1 ? 'No Item available' : $product->quantity . '  Item'}}</span> </p>

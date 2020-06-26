@@ -15,6 +15,7 @@
 
     <div class="container " style="padding-top: 30px; padding-bottom: 30px;">
         <div class="row justify-content-center">
+        @include('backend.partials.messages')
             <div class="col-md-7">
                 <div class="card mt-4 login">
                     <div class="card-header ">{{ __('Login') }}</div>

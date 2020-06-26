@@ -83,7 +83,8 @@ switch (type) {
 $('#division_id').change(function() {
     var division = $('#division_id').val();
     //Send Ajax request to the server
-    $.get("http://localhost/E-commerce/get-district/" + division, function(data) {
+    var url = "{{ url('/') }}";
+    $.get( url + "/get-district/" + division, function(data) {
         $('#district_area').html("");
         var option = " ";
         data = JSON.parse(data);
@@ -108,8 +109,9 @@ $.ajaxSetup({
 });
 
 function addToCart(product_id) {
-
-    $.post("http://localhost/E-commerce/api/cart/cart", {
+ 
+    var url = "{{ url('/') }}";
+    $.post(url + "/api/cart/cart", {
             product_id: product_id
         })
         .done(function(data) {

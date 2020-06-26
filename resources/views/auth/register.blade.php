@@ -13,6 +13,7 @@
 	
 	<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
     <div class="row justify-content-center">
+    @include('backend.partials.messages')
         <div class="col-md-8">
             <div class="card mt-4 reg">
                 <div class="card-header ">{{ __('Register') }}</div>
