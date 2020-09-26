@@ -20,7 +20,7 @@ class CheckoutsController extends Controller
     public function index()
     {
          $payments = Payment::orderBy('priority','asc')->get();
-        return view('Frontend.pages.checkouts',compact('payments'));
+        return view('frontend.pages.checkouts',compact('payments'));
     }
 
     /**

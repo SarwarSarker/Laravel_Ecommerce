@@ -50,7 +50,8 @@ class CartsController extends Controller
             ->where('order_id', NULL)
             ->first();
          }
-        if(!is_null($cart)){
+        if(!is_null($cart))
+        {
             $cart->increment('product_quantity');
         }else{
             $cart = new Cart();
