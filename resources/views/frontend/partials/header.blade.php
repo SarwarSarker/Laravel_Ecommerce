@@ -42,18 +42,6 @@
                         <li>
                             <a href="{{route('product')}}">Shop</a>
                         </li>
-                        <!-- 
-							<li>
-								<a href="cart.html">Features</a>
-							</li>
-
-							<li>
-								<a href="blog.html">Blog</a>
-							</li>
-
-							<li>
-								<a href="about.html">About</a>
-							</li> -->
                     </ul>
                 </nav>
             </div>
@@ -120,7 +108,7 @@
     <div class="wrap_header_mobile">
         <!-- Logo moblie -->
         <a href="{{route('index')}}" class="logo-mobile">
-            <img src="{{asset('public/asset/images/icons/logo.png')}}" alt="IMG-LOGO">
+            <img src="{{asset('public/asset/images/icons/idx.png')}}" alt="IMG-LOGO">
         </a>
 
         <!-- Button show menu -->
@@ -191,11 +179,7 @@
     <div class="wrap-side-menu">
         <nav class="side-menu">
             <ul class="main-menu">
-                <!-- <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
-                    <span class="topbar-child1">
-                        Free shipping for standard order over $100
-                    </span>
-                </li>
+               
 
                 <li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
                     <div class="topbar-child2-mobile">

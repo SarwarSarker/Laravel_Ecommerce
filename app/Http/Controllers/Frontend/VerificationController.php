@@ -8,6 +8,7 @@ use App\Models\User;
 
 class VerificationController extends Controller
 {
+    
     public function verify($token)
     {
         $user = User::where('remember_token', $token)->first();
