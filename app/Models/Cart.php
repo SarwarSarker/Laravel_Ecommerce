@@ -35,18 +35,18 @@ class Cart extends Model
      */
     public static function totalCarts()
     {
-        if(Auth::check())
-        {
+        // if(Auth::check())
+        // {
             $carts= Cart::where('user_id',Auth::id())
                        ->orWhere('ip_address', request()->ip())
                        ->where('order_id', NULL)
                        ->get();
-        }else
-        {
-            $carts= Cart::where('ip_address', request()->ip())
-                        ->where('order_id', NULL)
-                        ->get();
-        }
+        // }else
+        // {
+        //     $carts= Cart::where('ip_address', request()->ip())
+        //                 ->where('order_id', NULL)
+        //                 ->get();
+        // }
         return $carts;
     }
       /**

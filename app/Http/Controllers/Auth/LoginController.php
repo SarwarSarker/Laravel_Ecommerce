@@ -30,7 +30,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -40,16 +40,16 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->redirectTo = url()->previous();
+        // $this->redirectTo = url()->previous();
     }
-    public function showLoginForm()
-    {
-        if(!session()->has('url.intended'))
-        {
-            session(['url.intended' => url()->previous()]);
-        }
-        return view('auth.login');
-    }
+    // public function showLoginForm()
+    // {
+    //     if(!session()->has('url.intended'))
+    //     {
+    //         session(['url.intended' => url()->previous()]);
+    //     }
+    //     return view('auth.login');
+    // }
     
     public function login(Request $request)
     {
