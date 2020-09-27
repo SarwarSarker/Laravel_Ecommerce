@@ -97,7 +97,7 @@ class CartsController extends Controller
             'alert-type' => 'success'
           );
 
-        return back()->with($notification);
+        return Redirect()->back()->with($notification);
     }
 
     /**
@@ -121,6 +121,6 @@ class CartsController extends Controller
             'alert-type' => 'success'
           );
 
-        return back()->with($notification);
+        return Redirect()->back()->with($notification);
     }
 }
