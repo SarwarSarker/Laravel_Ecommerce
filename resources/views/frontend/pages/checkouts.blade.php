@@ -181,13 +181,16 @@
                         @endforeach
                     </div>
                     <div class="order-col">
-                        <div>Shipping Cost</div>
-                        <div><strong>{{App\Models\Order::orderBy('id','asc')->first()->shipping_charge}}</strong></div>
+                        {{-- <div>Shipping Cost</div>
+                        <div><strong>{{App\Models\Order::orderBy('id','asc')->first()->shipping_charge}}</strong></div> --}}
                     </div>
                     <div class="order-col">
                         <div><strong>TOTAL</strong></div>
                         <div><strong
-                                class="order-total">{{ $total_price + App\Models\Order::orderBy('id','asc')->first()->shipping_charge}}</strong>
+                                class="order-total">
+                                {{-- {{ $total_price + App\Models\Order::orderBy('id','asc')->first()->shipping_charge}} --}}
+                                {{ $total_price }}
+                            </strong>
                         </div>
                     </div>
                 </div>

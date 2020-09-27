@@ -89,15 +89,20 @@ class CartsController extends Controller
         {
             $cart->product_quantity = $request->product_quantity;
             $cart->save();
+            $notification = array(
+                'message' => 'Cart Item has Updated Successfully !!', 
+                'alert-type' => 'success'
+              );
+    
+            return Redirect()->back()->with($notification);
         }else{
-            return redirect()->route('carts');
+            $notification = array(
+                'message' => 'Cart Item has not Updated  !!', 
+                'alert-type' => 'danger'
+              );
+            return redirect()->route('carts')->with($notification);
         }
-        $notification = array(
-            'message' => 'Cart Item has Updated Successfully !!', 
-            'alert-type' => 'success'
-          );
-
-        return Redirect()->back()->with($notification);
+        
     }
 
     /**
@@ -113,14 +118,19 @@ class CartsController extends Controller
         if(!is_null($cart))
         {
             $cart->delete();
+            $notification = array(
+                'message' => 'Cart Item has Deleted !!', 
+                'alert-type' => 'success'
+              );
+    
+            return Redirect()->back()->with($notification);
         }else{
-            return redirect()->route('carts');
+            $notification = array(
+                'message' => 'Cart Item is not Deleted !!', 
+                'alert-type' => 'danger'
+              );
+            return redirect()->route('carts')->with($notification);
         }
-        $notification = array(
-            'message' => 'Cart Item has Deleted !!', 
-            'alert-type' => 'success'
-          );
-
-        return Redirect()->back()->with($notification);
+        
     }
 }
