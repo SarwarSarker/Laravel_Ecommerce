@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 use App\Models\Cart;
 use app\Models\Order;
+use App\Models\Product;
 
 use Auth;
 
 class CartsController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +31,7 @@ class CartsController extends Controller
      */
     public function store(Request $request)
     {
+        
         $this->validate($request,[
             'product_id' => 'required'
         ],

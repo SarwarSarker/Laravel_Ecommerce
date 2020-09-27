@@ -211,18 +211,6 @@
                 <li class="item-menu-mobile">
                     <a href="{{route('product')}}">Shop</a>
                 </li>
-
-                <li class="item-menu-mobile">
-                    <a href="cart.html">Features</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="blog.html">Blog</a>
-                </li>
-
-                <li class="item-menu-mobile">
-                    <a href="about.html">About</a>
-                </li>
             </ul>
         </nav>
     </div>

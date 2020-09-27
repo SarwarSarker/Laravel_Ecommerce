@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 class ProductsController extends Controller
 {
+    
     public function index()
     {
         $product=Product::orderby('id','desc')->paginate(9);

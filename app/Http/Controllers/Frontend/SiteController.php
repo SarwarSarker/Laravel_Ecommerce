@@ -10,6 +10,7 @@ use App\Models\Slider;
 
 class SiteController extends Controller
 {
+    
     public function index()
     {
         $slider= Slider::orderby('priority','asc')->get();
