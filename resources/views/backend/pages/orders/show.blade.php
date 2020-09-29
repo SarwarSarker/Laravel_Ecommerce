@@ -38,7 +38,7 @@
 
                             <div class="order_view">
                                 <h2>Orderer Items</h2>
-                                @if($order->carts->count() > 0 )
+                                {{-- @if($order->products->count() > 0 ) --}}
                                 <table class="table table-hover table-striped">
                                     <thead>
                                         <tr>
@@ -48,7 +48,6 @@
                                             <th>Quantity</th>
                                             <th>Price</th>
                                             <th>Total Price</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,43 +55,26 @@
                                         @php
                                         $total_price = 0 ;
                                         @endphp
-                                        @foreach($order->carts as $cart)
+                                        @foreach($order_details as $detail)
 
 
                                         <tr>
                                             <td>{{ $loop->index + 1 }}</td>
                                             <td>
-                                                <div class="cart-img-product b-rad-4 o-f-hidden">
-                                                    @if($cart->product->images->count() > 0 )
-                                                    <img src="{{asset('public/images/product/'. $cart->product->images->first()->image)}}"
+                                                <div class="product-img-product b-rad-4 o-f-hidden">
+                                                
+                                                    <img src="{{asset('public/images/product/'. $detail->image)}}"
                                                         alt="IMG-PRODUCT">
-                                                    @endif
+                                                  
                                                 </div>
                                             </td>
-                                            <td>{{$cart->product->title}}</td>
-                                            <td>
-                                                <form class="form-inline" action="{{ route('carts.update',$cart->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <input type="number" class="size8 m-text18 t-center num-product"
-                                                        name="product_quantity" value="{{$cart->product_quantity}}">
-                                                    &ensp;
-                                                    <button type="submit" class="btn btn-success">Update</button>
-                                                </form>
-                                            </td>
-                                            <td>{{$cart->product->price}} Taka</td>
+                                            <td>{{$detail->product_name}}</td>
+                                            <td>{{$detail->product_quantity}}</td>
+                                            <td>{{$detail->product_price}} Taka</td>
                                             @php
-                                            $total_price += $cart->product->price * $cart->product_quantity;
+                                            $total_price += $detail->product_price * $detail->product_quantity;
                                             @endphp
-                                            <td>{{$cart->product->price * $cart->product_quantity}} Taka</td>
-                                            <td>
-                                                <form class="form-inline" action="{{ route('carts.delete',$cart->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <input type="hidden" name="cart_id">
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                </form>
-                                            </td>
+                                            <td>{{$detail->product_price * $detail->product_quantity}} Taka</td>
                                         </tr>
                                         @endforeach
                                         <tr>
@@ -103,7 +85,7 @@
                                 </table>
 
                                 </tbody>
-                                @endif
+                                {{-- @endif --}}
                             </div>
                             <hr>
                             <div class="order_shipping">

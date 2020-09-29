@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12">
                 <center>
-                    <h2 class="breadcrumb-header">MY CART</h2>
+                    <h2 class="breadcrumb-header"> CART</h2>
                 </center>
 
             </div>
@@ -21,7 +21,7 @@
 </div>
 <!-- /BREADCRUMB -->
 <!-- Slide1 -->
-@if(App\Models\Cart::totalItems() > 0)
+@if(Cart::count() > 0)
 <section class="cart bgwhite p-t-70 p-b-100">
 
     <div class="container">
@@ -40,28 +40,26 @@
                     @php
                     $total_price = 0 ;
                     @endphp
-                    @foreach(App\Models\Cart::totalCarts() as $cart)
+                    @foreach(Cart::content() as $cart)
 
                     <tr class="table-row">
                         <td class="column-1">
                             <div class="cart-img-product b-rad-4 o-f-hidden">
-                                @if($cart->product->images->count() > 0 )
-                                <img src="{{asset('public/images/product/'. $cart->product->images->first()->image)}}"
-                                    alt="IMG-PRODUCT">
-                                @endif
+                                
+                                <img src="{{asset('public/images/product/'. $cart->options->image)}}"alt="IMG-PRODUCT">
                             </div>
                         </td>
-                        <td class="column-2">{{$cart->product->title}}</td>
+                        <td class="column-2">{{$cart->name}}</td>
                         <td class="column-4">
                             <div class="flex-w ">
-                                <form class="form-inline" action="{{ route('carts.update',$cart->id) }}" method="post">
+                                <form class="form-inline" action="{{ route('carts.update',$cart->rowId) }}" method="post">
                                     @csrf
                                     &ensp;
                                     <button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
                                         <i class="fs-12 fa fa-minus" aria-hidden="true"></i>
                                     </button>
                                     <input type="number" class="size8 m-text18 t-center num-product"
-                                        name="product_quantity" value="{{$cart->product_quantity}}">
+                                        name="qty" value="{{$cart->qty}}">
                                     <button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
                                         <i class="fs-12 fa fa-plus" aria-hidden="true"></i>
                                     </button>&ensp;
@@ -70,15 +68,12 @@
 
                             </div>
                         </td>
-                        <td class="column-3">{{$cart->product->price}} Taka</td>
-                        @php
-                        $total_price += $cart->product->price * $cart->product_quantity;
-                        @endphp
-                        <td class="column-5">{{$cart->product->price * $cart->product_quantity}} Taka</td>
+                        <td class="column-3">{{$cart->price}} Taka</td>
+                        <td class="column-5">{{$cart->price * $cart->qty}} Taka</td>
                         <td class="column-6">
-                            <form class="form-inline" action="{{ route('carts.delete',$cart->id) }}" method="post">
+                            <form class="form-inline" action="{{ route('carts.delete',$cart->rowId) }}" method="post">
                                 @csrf
-                                <input type="hidden" name="cart_id">
+                                <input type="hidden" name="rowId">
                                 <button type="submit" class="btn btn-danger" id="delete">Delete</button>
                             </form>
                         </td>
@@ -104,7 +99,7 @@
                 </span>
 
                 <span class="m-text21 w-size20 w-full-sm">
-                    {{$total_price}} Taka
+                    {{Cart::subtotal()}} Taka
                 </span>
             </div>
 

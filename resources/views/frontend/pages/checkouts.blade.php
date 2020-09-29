@@ -166,18 +166,13 @@
                         <div><strong>TOTAL(TAKA)</strong></div>
                     </div>
                     <div class="order-products">
-                        @php
-                        $total_price = 0;
-                        @endphp
-                        @foreach(App\Models\Cart::totalCarts() as $cart)
+
+                        @foreach(Cart::content() as $cart)
                         <div class="order-col">
-                            <div>{{ $cart->product->title }} - <span style="color:red;">Item
-                                    ({{ $cart->product_quantity }})</span></div>
-                            <div>{{ $cart->product->price * $cart->product_quantity}}</div>
+                            <div>{{ $cart->name }} - <span style="color:red;">Item
+                                    ({{ $cart->qty }})</span></div>
+                            <div>{{ $cart->price * $cart->qty}}</div>
                         </div>
-                        @php
-                        $total_price += $cart->product->price * $cart->product_quantity;
-                        @endphp
                         @endforeach
                     </div>
                     <div class="order-col">
@@ -189,7 +184,7 @@
                         <div><strong
                                 class="order-total">
                                 {{-- {{ $total_price + App\Models\Order::orderBy('id','asc')->first()->shipping_charge}} --}}
-                                {{ $total_price }}
+                                {{Cart::subtotal()}}
                             </strong>
                         </div>
                     </div>

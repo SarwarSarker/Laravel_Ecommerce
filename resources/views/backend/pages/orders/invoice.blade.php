@@ -86,7 +86,7 @@
 
     <div class="invoice-header">
         <div class="float-left site_logo">
-            <img src="{{asset('public/assets/images/favicon.png')}}" alt="" class="center">
+            <img src="{{asset('public/images/index_pic.png')}}" alt="" class="center">
         </div>
         <div class="float-right site_address">
             <h3>Lara E-commerce</h3>
@@ -112,7 +112,7 @@
     <hr>
     <div class="invoice-details">
         <h2>Orderer Items</h2>
-        @if($order->carts->count() > 0 )
+        {{-- @if($order->carts->count() > 0 ) --}}
         <table class="table ">
             <thead class="t-header ">
                 <tr>
@@ -127,16 +127,16 @@
             @php
             $total_price = 0 ;
             @endphp
-            @foreach($order->carts as $cart)
+            @foreach($order_details as $cart)
             <tr>
                 <td>{{ $loop->index + 1 }}</td>
-                <td>{{$cart->product->title}}</td>
+                <td>{{$cart->product_name}}</td>
                 <td>{{$cart->product_quantity}}</td>
-                <td>{{$cart->product->price}} Taka</td>
+                <td>{{$cart->product_price}} Taka</td>
                 @php
-                $total_price += $cart->product->price * $cart->product_quantity;
+                $total_price += $cart->product_price * $cart->product_quantity;
                 @endphp
-                <td>{{$cart->product->price * $cart->product_quantity}} Taka</td>
+                <td>{{$cart->product_price * $cart->product_quantity}} Taka</td>
 
             </tr>
             @endforeach
@@ -168,7 +168,7 @@
             </tr>
         </table>
 
-        @endif
+        {{-- @endif --}}
     </div>
 
     <div class="thank">

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
-use App\Models\Payment;
-use App\Models\Order;
-use App\Models\Cart;
 use Auth;
+use Cart;
+
+use App\Models\Order;
+use App\Models\Payment;
+use Illuminate\Http\Request;
+use App\Models\Order_details;
+use App\Http\Controllers\Controller;
 
 class CheckoutsController extends Controller
 {
@@ -69,12 +70,21 @@ class CheckoutsController extends Controller
 
             $order->payment_id = Payment::where('short_name', $request->payment_method_id)->first()->id;
             $order->save();
-            foreach(Cart::totalCarts() as $cart)
-            {
-               $cart->order_id = $order->id;
-               $cart->save();
+
+            $cartProducts= Cart::content();
+            foreach($cartProducts as $cartProduct){
+                $orderDetail= new Order_details;
+                $orderDetail->order_id=$order->id;
+                $orderDetail->product_id= $cartProduct->id;
+                $orderDetail->product_name=$cartProduct->name;
+                $orderDetail->product_price=$cartProduct->price;
+                $orderDetail->product_quantity=$cartProduct->qty;
+                $orderDetail->image=$cartProduct->options->image;
+                $orderDetail->save();
             }
             
+            Cart::destroy();
+
             $notification = array(
             'message' => 'Your Order has taken Successfully !!.. Please wait for Admin confirmation...',
             'alert-type' => 'success'

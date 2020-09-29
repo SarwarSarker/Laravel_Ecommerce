@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use PDF;
+use Cart;
 
 use App\Models\Order;
-use PDF;
+use Illuminate\Http\Request;
+use App\Models\Order_details;
+use App\Http\Controllers\Controller;
 
 class OrdersController extends Controller
 {
@@ -21,10 +23,11 @@ class OrdersController extends Controller
     }
     public function show($id)
     {
+        $order_details = Order_details::orderby('id')->get();
         $order=Order::find($id);
         $order->is_seen_by_admin = 1;
         $order->save();
-        return view('backend.pages.orders.show',compact('order'));
+        return view('backend.pages.orders.show',compact('order','order_details'));
     }
     public function completed($id)
     {
@@ -63,8 +66,9 @@ class OrdersController extends Controller
     }
     // Invoice generate
     public function generateInvoice($id){
+        $order_details = Order_details::orderby('id')->get();
         $order=Order::find($id);
-        $pdf = PDF::loadView('backend.pages.orders.invoice',compact('order'));
+        $pdf = PDF::loadView('backend.pages.orders.invoice',compact('order','order_details'));
         return $pdf->stream('invoice.pdf');
     }
     public function delete($id){

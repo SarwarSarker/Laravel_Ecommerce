@@ -108,11 +108,11 @@ $.ajaxSetup({
     }
 });
 
-function addToCart(product_id) {
- 
+function addToCart(id) {
+    
     var url = "{{ url('/') }}";
     $.post(url + "/api/cart/cart", {
-            product_id: product_id
+            id: id
         })
         .done(function(data) {
             data = JSON.parse(data);

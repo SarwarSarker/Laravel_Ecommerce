@@ -92,7 +92,8 @@
                         <img src="{{asset('public/asset/images/icons/icon-header-02.png')}}"
                             class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti" id="total">
-                            {{ App\Models\Cart::totalItems() }}
+                            {{-- {{ App\Models\Cart::totalItems() }} --}}
+                            {{ Cart::count()}}
                         </span>
 
                     </a>
@@ -157,7 +158,8 @@
                         <img src="{{asset('public/asset/images/icons/icon-header-02.png')}}"
                             class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti" id="total">
-                            {{ App\Models\Cart::totalItems() }}
+                            {{-- {{ App\Models\Cart::totalItems() }} --}}
+                           {{ Cart::count()}}
                         </span>
 
                     </a>
