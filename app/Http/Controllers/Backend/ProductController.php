@@ -69,7 +69,7 @@ class ProductController extends Controller
 
         if($request->product_image > 0 ){
             foreach($request->product_image as $image){
-                $img = uniqid() .'.'. $image->getClientOriginalExtension();
+                $img = time() .'.'. $image->getClientOriginalExtension();
                 $location = public_path('images/product/'.$img);
                 Image::make($image)->save($location);
 
@@ -110,6 +110,30 @@ class ProductController extends Controller
          $product->brand_id = $request->brand_id;
          
          $product->save();
+        
+         if($request->product_image > 0 ){
+            
+            $product_image = ProductImage::where('product_id', $product->id)->get();
+    
+            foreach ($product_image as $product_images) {
+                ProductImage::where('id', $product_images->id)->delete();
+                if(File::exists('public/images/product/'.$product_images->image)) 
+                {
+                    File::delete('public/images/product/'.$product_images->image);
+                } 
+            }
+            foreach($request->product_image as $image){
+
+                $img = time() .'.'. $image->getClientOriginalExtension();
+                $location = public_path('images/product/'.$img);
+                Image::make($image)->save($location);
+
+                $product_image = new ProductImage;
+                $product_image->product_id = $product->id;
+                $product_image->image = $img;
+                $product_image->save();
+            }
+        }
          
          session()->flash('success','Successfully Product Updated!'); 
  

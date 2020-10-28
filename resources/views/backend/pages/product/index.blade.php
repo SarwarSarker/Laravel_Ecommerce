@@ -15,6 +15,7 @@
                         <tr>
                             <th>#</th>
                             <th>Product Title</th>
+                            <th>Product Image</th>
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Action</th>
@@ -23,6 +24,11 @@
                         <tr>
                             <td>#</td>
                             <td>{{$row->title}}</td>
+                            <td>
+                                @foreach($row->images as $image)
+                                <img src="{{asset('public/images/product/'. $image->image)}}" alt="{{$row->title}}" height="400">
+                                @endforeach
+                             </td>
                             <td>{{$row->price}}</td>
                             <td>{{$row->quantity}}</td>
                             <td><a href="{{route('admin.product.edit',$row->id)}}" class="btn btn-success">Edit</a>

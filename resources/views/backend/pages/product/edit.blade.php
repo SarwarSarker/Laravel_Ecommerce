@@ -52,33 +52,21 @@
                                   @endforeach 
                                   </select>
                                  </div>
-                                  <div class="form-group">
-                                  <label for="exampleInputImage">Image</label>
+                                 <div class="form-group">
+                                  <label for="exampleInputOldImage">Old Image</label>
+                                  @foreach($product->images as $image)
+                                  <img src="{{asset('public/images/product/'. $image->image)}}" alt="{{$product->title}}" height="40">
+                                  @endforeach
+                                  <br>
+                                  <br>
+                                  <label for="exampleInputImage">Image (can attach more than one)</label>
                                   <div class="row">
-                                     <div class="col-md-4">
-                                     <input type="file" class="form-control"   name="product_image[]">
-                                     </div>
-                                     <div class="col-md-4">
-                                     <input type="file" class="form-control"   name="product_image[]">
-                                     </div>
-                                     <div class="col-md-4">
-                                     <input type="file" class="form-control"   name="product_image[]">
-                                     </div>
-                                     <div class="col-md-4">
-                                     <input type="file" class="form-control"   name="product_image[]">
-                                     </div>
-                                     <div class="col-md-4">
-                                     <input type="file" class="form-control"   name="product_image[]">
-                                     </div>
+                                      <div class="col-md-9">
+                                          <input type="file" class="form-control" name="product_image[]" multiple />
+                                      </div>
                                   </div>
-                                 </div>
+                              </div>
 
-                                 <!--
-
-                                <div class="form-group">
-                                  <label for="exampleInputBrand_id">Brand_id</label>
-                                  <input type="text" class="form-control"  placeholder="Password" name="brand_id">
-                                </div> -->
                                 <button type="submit" class="btn btn-primary">Update Product</button>
                             </form>
                     </div>
